@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package momo;
+
+service ProviderService{
+    rpc CreateMomoProvider(CreateMomoProviderRequest) returns (MomoProvider){}
+    rpc FindAllMomoProviders(stream FindAllMomoProvidersRequest) returns (stream FindAllMomoProvidersResponse){}
+    rpc FindOneMomoProvider(FindOneMomoProviderRequest) returns (MomoProvider){}
+    rpc UpdateMomoProvider(UpdateMomoProvider) returns (MomoProvider){}
+    rpc DeleteMomoProvider(FindOneMomoProviderRequest) returns (MomoProvider){}
+}
+
+message UpdateMomoProvider{
+    string id = 1;
+    CreateMomoProviderRequest poviderUpdate = 2;
+}
+
+message FindOneMomoProviderRequest{
+    string id = 1;
+}
+
+message FindAllMomoProvidersRequest{
+    int32 page = 1;
+    int32 size = 2;
+    repeated string sort = 3;
+}
+
+message FindAllMomoProvidersResponse{
+    repeated MomoProvider data = 1;
+    MetaData metaData = 2;
+}
+
+message MetaData {
+    bool sorted = 1;
+    int32 total = 2;
+    int32 pageNumber = 3;
+    int32 pageSize = 4;
+    int32 next = 5;
+    int32 prev = 6;
+}
+
+message CreateMomoProviderRequest{
+    string name = 1;
+    string apiKey = 2;
+    string secretKey = 3;
+    string logo = 4;
+    string color = 5;
+    boolean isWithdrawalAvailable = 6;
+    boolean isDepositAvailable = 7;
+    int credibility = 8;
+}
+
+message MomoProvider{
+    string id = 1;
+    string name = 2;
+    string apiKey = 3;
+    string secretKey = 4;
+    string logo = 5;
+    string color = 6;
+    boolean isWithdrawalAvailable = 7;
+    boolean isDepositAvailable = 8;
+    int credibility = 9;
+}
+
+
